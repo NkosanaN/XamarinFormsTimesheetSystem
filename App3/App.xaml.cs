@@ -14,7 +14,7 @@ namespace App3
         {
             InitializeComponent();
             XF.Material.Forms.Material.Init(this);
-            MainPage = new Pdf();
+            MainPage = new EmpListViewPage();
         }
 
         protected override void OnStart()
