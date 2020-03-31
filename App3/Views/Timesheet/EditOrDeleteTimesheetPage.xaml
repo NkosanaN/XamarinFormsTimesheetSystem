@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material.Forms"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:converter="clr-namespace:App3.Helpers"
+             xmlns:converters="clr-namespace:App3.Converter"
+             xmlns:controls="clr-namespace:App3.Controls"
+             xmlns:vm="clr-namespace:App3.Viewmodel"
+             mc:Ignorable="d" 
+             x:Class="App3.EditOrDeleteTimesheetPage">
+    
+    <!--<ContentPage.BindingContext>
+        <vm:AddTimeViewModel/>
+    </ContentPage.BindingContext>-->
+
+    <d:ContentPage.ToolbarItems x:Uid="navbar" StartColor="#1D62F0" EndColor="#fff">
+        <ToolbarItem Text="Main Menu" Order="Secondary" Clicked="BacktoMain"></ToolbarItem>
+    </d:ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:DecimalToStringConverter x:Key="decimalToStringConverter"/>
+            <converter:BtnEnablerMultiTriggerConverter x:Key="dataHasBeenEntered"/>
+            <converter:RoundMyNumberConverter x:Key="roundoff"/>
+
+            <Style x:Key="EntryStyle" TargetType="{x:Type Entry}">
+              </Style>
+            <Style x:Key="ValidationErrorLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Red"/>
+            </Style>
+            <Style x:Key="ErrorColor" TargetType="Entry">
+                <Setter Property="TextColor" Value="Red"/>
+            </Style>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="15" VerticalOptions="CenterAndExpand">
+                <ActivityIndicator IsEnabled="True" IsVisible="{Binding IsBusy , Mode=TwoWay}" IsRunning="{Binding IsBusy , Mode=TwoWay}"/>
+
+                <!--<StackLayout FlexLayout.AlignSelf="Center">
+                    <controls:CustomPicker HorizontalOptions="FillAndExpand"
+                                   x:Name="empList1"
+                                   HeightRequest="40" 
+                                   CornerRadius="50"
+                                   Image="arrow_drop_down_white_72x72"
+                                   Title="{Binding timesheetmodel.EmployeeName}"
+                                   BackgroundColor="#5B5252"                                 
+                                   TextColor="White"
+                                   TitleColor="White"
+                                   SelectedItem="{Binding SelectedEmp}"
+                                   IsEnabled="False">
+                    </controls:CustomPicker>
+                    <Label Text="{Binding SelectedEmp.EmployeeCode,Mode=TwoWay}" Font="15" IsVisible="False" IsEnabled="False"/>
+                </StackLayout>-->
+
+                <StackLayout FlexLayout.AlignSelf="Center">
+                    <controls:CustomPicker HorizontalOptions="FillAndExpand"
+                                   x:Name="time"
+                                   HeightRequest="40" 
+                                   CornerRadius="50"
+                                   Image="arrow_drop_down_white_72x72"
+                                   Title="{Binding timesheetmodel.TimeCodeDescription}"
+                                   BackgroundColor="#5B5252"                                 
+                                   TextColor="White"
+                                   TitleColor="White"
+                                   ItemDisplayBinding="{Binding TimeCodeDescription}"
+                                   SelectedItem="{Binding SelectedTimeCode}">
+                    </controls:CustomPicker>
+                    <Label Text="{Binding SelectedTimeCode.TimeCode}" Font="15" IsVisible="False" IsEnabled="False"/>
+                </StackLayout>
+
+                <StackLayout FlexLayout.AlignSelf="Center">
+                    <controls:CustomPicker HorizontalOptions="FillAndExpand"
+                                   x:Name="debt"
+                                   HeightRequest="40"
+                                   CornerRadius="50"
+                                   Image="arrow_drop_down_white_72x72"
+                                   Title="{Binding timesheetmodel.DebtorName}"
+                                   BackgroundColor="#5B5252"                                 
+                                   TextColor="White"
+                                   TitleColor="White"
+                                   ItemDisplayBinding="{Binding DebtorName}"
+                                   SelectedItem="{Binding SelectedDebt}">
+                    </controls:CustomPicker>
+                    <Label Text="{Binding SelectedDebt.DebtorCode}"  TextColor="Black" Font="15" IsVisible="True" IsEnabled="False"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Margin="10" Text="Placeholder" IsVisible="False"/>
+                </StackLayout>
+
+                <StackLayout FlexLayout.AlignSelf="Center">
+                    <material:MaterialTextField Placeholder="Ref"
+                            HelperText=""
+                            Text="{Binding timesheetmodel.TimesheetRef, Mode=TwoWay}"
+                            InputType="Text"
+                            TextColor="Black"
+                            PlaceholderColor="Black"
+                            BackgroundColor="WhiteSmoke"
+                            HelperTextColor="#B00020"                    
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            LeadingIcon="baseline_create_black_18dp"/>
+                </StackLayout>
+
+
+                <StackLayout>
+                    <controls:CustomEntry Placeholder="Hour(s) rate start from 0.1 to 8"
+                                          Text="{Binding timesheetmodel.TimesheetHours,Mode=TwoWay ,Converter={StaticResource roundoff}}"
+                                          TextColor="Black"
+                                          PlaceholderColor="Black"
+                                          BackgroundColor="WhiteSmoke"
+                                          VerticalOptions="CenterAndExpand"
+                                          Keyboard="Numeric"
+                                          MaxLength="3"
+                                          Grid.Column="1"/>
+                </StackLayout>
+
+
+                <StackLayout FlexLayout.AlignSelf="Center">
+                    <material:MaterialTextField Placeholder="Comment"
+                            HelperText=""
+                            Text="{Binding timesheetmodel.TimesheetComment, Mode=TwoWay}"
+                            InputType="Text"
+                            TextColor="Black"
+                            PlaceholderColor="Black"
+                            BackgroundColor="WhiteSmoke"
+                            HelperTextColor="#B00020"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            LeadingIcon="baseline_add_comment_black_18dp"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke">
+                    <input:CheckBox Text="Chargeable" 
+                            Type="Check"
+                            TextColor="Black"
+                            BorderColor="Black"
+                            IsChecked="{Binding timesheetmodel.TimesheetChargeable}" 
+                            HorizontalOptions="FillAndExpand"  x:Uid="vat"/>
+                </StackLayout>
+
+                <StackLayout Margin="6">
+                    <Grid>
+                        <Frame OutlineColor="#37464F"
+                               BackgroundColor="Transparent"
+                               Grid.Column="0" Grid.Row="0"
+                               Padding="22,10"
+                               HorizontalOptions="CenterAndExpand"
+                               >
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EditTimesheetCommand}"/>
+                            </Frame.GestureRecognizers>
+
+                            <Label Text="Edit" FontSize="Default" TextColor="Black" />
+                        </Frame>
+
+                        <Frame OutlineColor="#B00020"
+                               BackgroundColor="Transparent"
+                               Grid.Column="1" Grid.Row="0"
+                               Padding="18,10"
+                               HorizontalOptions="CenterAndExpand">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding DeleteTimesheetCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Label Text="Delete" FontSize="Default" TextColor="Black"/>
+
+                        </Frame>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+    
+  
+</ContentPage>

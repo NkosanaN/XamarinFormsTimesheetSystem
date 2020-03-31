@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:App3.Helpers"
+             xmlns:converters="clr-namespace:App3.Converter"
+             xmlns:controls="clr-namespace:App3.Controls"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material.Forms"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:vm="clr-namespace:App3.Viewmodel"
+             mc:Ignorable="d"
+             x:Class="App3.Views.AddTimesheetPage">
+
+    <ContentPage.BindingContext>
+        <vm:AddTimeViewModel/>
+    </ContentPage.BindingContext>
+
+    <d:ContentPage.ToolbarItems x:Uid="navbar" StartColor="#1D62F0" EndColor="#fff">
+        <ToolbarItem Text="Main Menu" Order="Secondary" Clicked="BacktoMain"></ToolbarItem>
+    </d:ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <converter:DecimalToStringConverter x:Key="decimalToStringConverter"/>
+            <converter:BtnEnablerMultiTriggerConverter x:Key="dataHasBeenEntered"/>
+
+            <Style x:Key="EntryStyle" TargetType="{x:Type Entry}">
+            </Style>
+            <Style x:Key="ValidationErrorLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Red"/>
+            </Style>
+            <Style x:Key="ErrorColor" TargetType="Entry">
+                <Setter Property="TextColor" Value="Red"/>
+            </Style>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="15" VerticalOptions="CenterAndExpand">
+                <!--<StackLayout FlexLayout.AlignSelf="Center">
+                    <controls:CustomPicker HorizontalOptions="FillAndExpand"
+                                   x:Name="empList1"
+                                   HeightRequest="40" 
+                                   CornerRadius="50"
+                                   Image="arrow_drop_down_white_72x72"
+                                   Title="Select Employee Name"
+                                   BackgroundColor="#5B5252"                                 
+                                   TextColor="White"
+                                   TitleColor="White"
+                                   ItemDisplayBinding="{Binding EmployeeName}"
+                                   SelectedItem="{Binding SelectedEmp}"
+                                   SelectedIndexChanged="OnEmp">
+                    </controls:CustomPicker>
+                    <Label Text="{Binding SelectedEmp.EmployeeCode,Mode=TwoWay}" Font="15" IsVisible="False" IsEnabled="False"/>
+                </StackLayout>-->
+
+                <StackLayout FlexLayout.AlignSelf="Center">
+                    <controls:CustomPicker HorizontalOptions="FillAndExpand"
+                                   x:Name="time"
+                                   HeightRequest="40"
+                                   CornerRadius="50"
+                                   ItemDisplayBinding="{Binding TimeCodeDescription}"
+                                   SelectedItem="{Binding SelectedTimeCode}" 
+                                   Image="arrow_drop_down_white_72x72"
+                                   Title="Select TimeCode Description"
+                                   BackgroundColor="#5B5252"                                 
+                                   TextColor="White"
+                                   TitleColor="White"
+                                  SelectedIndexChanged="OnTime">
+                    </controls:CustomPicker>
+                    <Label Text="{Binding SelectedTimeCode.TimeCode}" Font="15" IsVisible="False" IsEnabled="False"/>
+                </StackLayout>
+
+                <StackLayout FlexLayout.AlignSelf="Center">
+                    <controls:CustomPicker HorizontalOptions="FillAndExpand"
+                                x:Name="debt"
+                                HeightRequest="40" 
+                                ItemDisplayBinding="{Binding DebtorName}"
+                                SelectedItem="{Binding SelectedDebt}" 
+                                Image="arrow_drop_down_white_72x72"
+                                CornerRadius="50"
+                                Title="Select Debtor Name"
+                                BackgroundColor="#5B5252"                                 
+                                TextColor="White"                                   
+                                TitleColor="White"
+                                SelectedIndexChanged="Ondebtor">
+                    </controls:CustomPicker>
+                    <Label Text="{Binding SelectedDebt.DebtorName}" Font="15" IsVisible="False" IsEnabled="False"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Date" Margin="10" TextColor="Black" FontSize="Medium"/>
+                    <DatePicker  x:Name="todate" 
+                             VerticalOptions="CenterAndExpand"  
+                             Date="{x:Static system:DateTime.Today}" 
+                             HorizontalOptions="EndAndExpand" 
+                             MaximumDate="{x:Static system:DateTime.Today}" Margin="-5"/>
+                </StackLayout>
+
+                <StackLayout FlexLayout.AlignSelf="Center">
+                    <material:MaterialTextField Placeholder="Ref"
+                            HelperText="{Binding TimesheetRef.Errors,
+                            Converter={StaticResource FirstValidationErrorConverter}}"
+                            Text="{Binding TimesheetRef.Value, Mode=TwoWay}"
+                            InputType="Text"
+                            TextColor="Black"
+                            PlaceholderColor="Black"
+                            BackgroundColor="WhiteSmoke"
+                            HelperTextColor="#B00020"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            LeadingIcon="baseline_create_black_18dp"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <controls:CustomEntry Placeholder="Hour(s) rate start from 0.1 to 8"
+                                          Text="{Binding TimesheetHours,Mode=TwoWay}"
+                                          TextColor="Black"
+                                          BackgroundColor="WhiteSmoke"
+                                          VerticalOptions="CenterAndExpand"
+                                          Keyboard="Numeric"
+                                          MaxLength="3">
+                    </controls:CustomEntry>
+                </StackLayout>
+
+
+                <StackLayout FlexLayout.AlignSelf="Center">
+                    <material:MaterialTextField Placeholder="Comment"
+                            HelperText="{Binding TimesheetComment.Errors,
+                            Converter={StaticResource FirstValidationErrorConverter}}"
+                            Text="{Binding TimesheetComment.Value, Mode=TwoWay}"
+                            InputType="Text"
+                            TextColor="Black"
+                            PlaceholderColor="Black"
+                            BackgroundColor="WhiteSmoke"
+                            HelperTextColor="#B00020"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            LeadingIcon="baseline_add_comment_black_18dp"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="WhiteSmoke">
+                    <input:CheckBox Text="Chargeable" 
+                            Type="Check"
+                            TextColor="Black"
+                            BorderColor="Black"
+                            IsChecked="{Binding TimesheetChargeable.Value}" 
+                            HorizontalOptions="FillAndExpand"  x:Uid="vat"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <material:MaterialButton BackgroundColor="#696969"
+                                 HorizontalOptions="Center"
+                                 Text="Submit"
+                                 TextColor="White"
+                                 VerticalOptions="Center"
+                                 ButtonType="Flat"
+                                 Command="{Binding AddTimesheetCommand}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

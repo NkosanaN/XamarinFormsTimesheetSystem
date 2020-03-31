@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:App3.Viewmodel"
+             mc:Ignorable="d"
+             x:Class="App3.Views.Mock.EmpListViewPage">
+    <ContentPage.BindingContext>
+        <vm:MockListViewEmployee/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="NavTo" Order="Secondary"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+
+    <ContentPage.Content>
+        <StackLayout>
+        <StackLayout>
+            <ListView ItemsSource="{Binding employees}" 
+                  HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="85"/>
+                                    <ColumnDefinition Width="75"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding EmployeeCode}" Grid.Column="0"/>
+                                <Label Text="{Binding EmployeeName}" Grid.Column="1"/>
+                                <Label Text="{Binding StartDate,StringFormat='\{0:dd-MMM-yy}'}" Grid.Column="2"/>
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+
+
+            </ListView>
+        </StackLayout>
+
+
+            <StackLayout>
+                <Button Text="add" Clicked="NavTo"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+
+</ContentPage>

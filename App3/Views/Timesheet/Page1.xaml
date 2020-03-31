@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material.Forms"
+             xmlns:vm="clr-namespace:App3.Viewmodel"
+             mc:Ignorable="d"
+             x:Name="lines"
+             x:Class="App3.Views.Timesheet.Lottie">
+    
+    <ContentPage.BindingContext>
+        <vm:Page1LineViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout VerticalOptions="FillAndExpand">
+        <Label Text="Line(s)" FontSize="Large" Margin="0,0,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="Black"/>
+        <Frame BackgroundColor="#707070" BorderColor="DarkSlateGray" Padding="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Margin="10,0,10,0" Text="TaskNo" VerticalOptions="Center" Grid.Column="0" TextColor="White" FontAttributes="Bold" Font="15" FontSize="Micro"/>
+                <Label Margin="10,0,10,0" Text="Description" VerticalOptions="Center" Grid.Column="1" TextColor="White" FontAttributes="Bold" Font="15" FontSize="Micro"/>
+                <Label Margin="10,0,10,0" Text="Date" VerticalOptions="Center" Grid.Column="2" TextColor="White" FontAttributes="Bold" Font="15" FontSize="Micro"/>
+                <Label Margin="10,0,10,0" Text="Option" VerticalOptions="Center" Grid.Column="3" TextColor="White" FontAttributes="Bold" Font="15" FontSize="Micro"/>
+                
+
+                <BoxView BackgroundColor="DarkSlateGray" WidthRequest="1" Grid.Column="0" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                <BoxView BackgroundColor="DarkSlateGray" WidthRequest="1" Grid.Column="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                <BoxView BackgroundColor="DarkSlateGray" WidthRequest="1" Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                <BoxView BackgroundColor="DarkSlateGray" WidthRequest="1" Grid.Column="3" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+
+            </Grid>
+        </Frame>
+
+        <ListView ItemsSource="{Binding PaymentLines}" SelectionMode="None" SeparatorVisibility="None" HasUnevenRows="False" SelectedItem="{Binding SelectedItem}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <Frame Padding="0" BorderColor="DarkSlateGray">
+                            <Grid Padding="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.2*"/>
+                                    <ColumnDefinition Width="2.5*"/>
+                                    <ColumnDefinition Width="2.5*"/>
+                                    <ColumnDefinition Width="2.5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Margin="10,0,10,0" Text="{Binding TaskNo}" VerticalOptions="Center" Grid.Column="0"/>
+
+                                <Entry Text="{Binding TaskDescription}"  VerticalOptions="Center" Grid.Column="1"/>
+
+                                <Label Margin="10,0,10,0" Text="{Binding TargetDate,StringFormat='\{0:dd-MMM-yy}'}" VerticalOptions="Center" Grid.Column="2"/>
+
+                                <!--<Image Source="baseline_delete_forever_black_18dp"  HorizontalOptions="Center" Grid.Column="3"/>-->
+
+                                <!--<Button ImageSource="baseline_delete_forever_black_18dp" HorizontalOptions="Center" Grid.Column="3"/>-->
+
+                                <Frame OutlineColor="Transparent" 
+                                       BackgroundColor="Transparent"
+                                       Grid.Column="3" 
+                                       Padding="10,10,10,10"
+                                       HorizontalOptions="CenterAndExpand">
+                                    <Frame.GestureRecognizers>
+                                        <!--<TapGestureRecognizer Command="{Binding DeleteCommand}" CommandParameter="{Binding.}"/>-->
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference lines}}" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Padding="0,-5,0,0">
+                                        <!--<Label Text="AddLine" FontSize="Default" TextColor="Black"/>-->
+                                        <Image HorizontalOptions="Center" Source="baseline_delete_forever_black_18dp" Grid.Column="3"/>
+                                    </StackLayout>
+                                </Frame>
+
+
+                                <BoxView BackgroundColor="DarkSlateGray" WidthRequest="1" Grid.Column="0" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                <BoxView BackgroundColor="DarkSlateGray" WidthRequest="1" Grid.Column="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                <BoxView BackgroundColor="DarkSlateGray" WidthRequest="1" Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                <BoxView BackgroundColor="DarkSlateGray" WidthRequest="1" Grid.Column="3" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+
+                            </Grid>
+
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+
+                <StackLayout Padding="5">
+                    <Grid>
+                        <!--<Button Command="{Binding AddCommand}"  Text="Add" Grid.Column="0"/>
+                        <Button Command="{Binding AddLineCommand}"  Text="Save" Grid.Column="1"/>-->
+
+                        <Frame OutlineColor="Transparent"
+                               BackgroundColor="Transparent"
+                               Grid.Column="0" Grid.Row="0"
+                               Padding="22,10"
+                               HorizontalOptions="CenterAndExpand">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddCommand}" />
+                            </Frame.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal">
+                                <Image HorizontalOptions="Center" Source="baseline_add_circle_black_18dp" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="AddLine" FontSize="Default" TextColor="Black" Grid.Row="0" Grid.Column="0" Margin="-5,10,0,10"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame OutlineColor="Transparent"
+                               BackgroundColor="Transparent"
+                               Grid.Column="1" Grid.Row="0"
+                               Padding="22,10"
+                               HorizontalOptions="CenterAndExpand">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SaveCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal">
+                                <Image HorizontalOptions="Center" Source="baseline_check_circle_outline_black_18dp" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="Save" FontSize="Default" TextColor="Black" Margin="-5,10,0,10" Grid.Row="0" Grid.Column="1"/>
+                            </StackLayout>
+                        </Frame>
+                        
+
+                    </Grid>
+                </StackLayout>
+
+            </ListView.Footer>
+        </ListView>
+    </StackLayout>
+</ContentPage>

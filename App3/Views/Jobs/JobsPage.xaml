@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             mc:Ignorable="d"
+             x:Class="App3.Views.Jobs.JobsPage">
+    
+    
+    <!--<ContentPage.BindingContext>
+        <vm:JobViewModel/>
+    </ContentPage.BindingContext>-->
+
+
+    <!--<ContentPage.ToolbarItems x:Uid="navbar" StartColor="#1D62F0" EndColor="#fff">
+        <ToolbarItem Text="Create" Order="Primary" Clicked="NavigateToAddJobsPage_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>-->
+
+    <StackLayout>
+
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand" x:Name="outerLayer" Margin="5">
+            <StackLayout>
+                <Grid Padding="2,2,2,2" BackgroundColor="#707070" HeightRequest="30" RowSpacing="0" ColumnSpacing="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="85" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Label Text="JobNo" TextColor="White" FontAttributes="Bold" Font="13" FontSize="Micro"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Padding="2,0,5,0">
+                        <Label Text="Create Date" TextColor="White" FontAttributes="Bold" Font="13" FontSize="Micro"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Padding="2,0,5,0">
+                        <Label Text="Due Date" TextColor="White" FontAttributes="Bold" Font="13" FontSize="Micro"/>
+                    </Grid>
+
+                    <Grid Grid.Column="3" Padding="2,0,5,0">
+                        <Label Text="Issue" TextColor="White" FontAttributes="Bold" Font="13" FontSize="Micro"/>
+                    </Grid>
+
+                    <Grid Grid.Column="4" Padding="2,0,5,0">
+                        <Label Text="Status" TextColor="White" FontAttributes="Bold" Font="13" FontSize="Micro"/>
+                    </Grid>
+
+                    <Grid Grid.Column="5" Padding="2,0,5,0">
+                        <Label Text="Job Title" TextColor="White" FontAttributes="Bold" Font="13" FontSize="Micro"/>
+                    </Grid>
+
+                    <!--<Grid Grid.Column="6" Padding="2,0,5,0">
+                        <Label Text="Customer" TextColor="White" FontAttributes="Bold" Font="13"   FontSize="Micro"/>
+                    </Grid>-->
+
+                    <!--<Grid Grid.Column="7" Padding="2,0,5,0">
+                        <Label Text="Quote" TextColor="White" FontAttributes="Bold" Font="13" FontSize="Micro"/>
+                    </Grid>-->
+
+                    <Grid Grid.Column="6" Padding="2,0,5,0">
+                        <Label Text="Equipment" TextColor="White" FontAttributes="Bold" Font="13" FontSize="Micro"/>
+                    </Grid>
+
+                    <Grid Grid.Column="7" Padding="2,0,5,0">
+                        <Label Text="Serial No" TextColor="White" FontAttributes="Bold" Font="13"  FontSize="Micro"/>
+                    </Grid>
+
+                    <Grid Grid.Column="8" Padding="2,0,5,0">
+                        <Label Text="Comments" TextColor="White" FontAttributes="Bold" Font="13"   FontSize="Micro"/>
+                    </Grid>
+
+                    <Grid Grid.Column="9" Padding="2,0,5,0">
+                        <Label Text="Invoiced" TextColor="White" FontAttributes="Bold" Font="13"  FontSize="Micro"/>
+                    </Grid>
+
+                </Grid>
+            </StackLayout>
+
+            <!--<StackLayout>
+                <ScrollView>
+                    <ListView x:Name="JobF"
+                              RefreshCommand="{Binding LoadItemsCommand}"
+                              ItemTapped="jobListView_ItemTapped"
+                              HasUnevenRows="True"
+                              ItemsSource="{Binding jobs}"
+                              IsPullToRefreshEnabled="True"
+                              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                              BackgroundColor="White">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Padding="0,10">
+                                        <Grid RowSpacing="0" ColumnSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="85" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding JobNo}" TextColor="Black" Grid.Column="0" FontSize="10"/>
+                                            <Label Text="{Binding JobCreatedDate,StringFormat='\{0:dd-MM-yy}'}" TextColor="Black"  Grid.Column="1" FontSize="10"/>
+                                            <Label Text="{Binding JobDueDate,StringFormat='\{0:dd-MM-yy}'}" Grid.Column="2" TextColor="Black" FontSize="10"/>
+                                            <Label Text="{Binding JobIssuedDate,StringFormat='\{0:dd-MM-yy}'}" Grid.Column="3" TextColor="Black" FontSize="10"/>
+                                            <Label Text="{Binding JobStatusName}" Grid.Column="4" TextColor="Black" FontSize="10"/>
+                                            <Label Text="{Binding JobTitle}" Grid.Column="5" FontSize="10" TextColor="Black"/>
+                                            --><!--<Label Text="{Binding DebtorName}" Grid.Column="6" TextColor="Black" FontSize="10"/>-->
+                                            <!--<Label Text="{Binding QuoteNr}" Grid.Column="7" FontSize="10"/>--><!--
+                                            <Label Text="{Binding Equipment}" Grid.Column="6" TextColor="Black" FontSize="10"/>
+                                            <Label Text="{Binding SerialNo}" Grid.Column="7" FontSize="10" TextColor="Black"/>
+                                            <Label Text="{Binding Comments}" Grid.Column="8" TextColor="Black" FontSize="10"/>
+                                            <input:CheckBox  Type="Check" IsDisabled="True" IsChecked="{Binding Invoiced}" HorizontalOptions="FillAndExpand" Grid.Column="9" TextFontSize="10"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
+            </StackLayout>-->
+        </StackLayout>
+
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand" x:Name="firstLayer" Margin="5">
+            <StackLayout>
+                <Grid Padding="2,2,2,2" BackgroundColor="#707070" HeightRequest="30" RowSpacing="0" ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="85" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Label Text="Job No" TextColor="White" FontAttributes="Bold" Font="15"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Padding="2,0,5,0">
+                        <Label Text="Status" TextColor="White" FontAttributes="Bold" Font="15"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Padding="2,0,5,0">
+                        <Label Text="Equipment" TextColor="White" FontAttributes="Bold" Font="15"/>
+                    </Grid>
+
+                    <Grid Grid.Column="3" Padding="2,0,5,0">
+                        <Label Text="Comments" TextColor="White" FontAttributes="Bold" Font="15"/>
+                    </Grid>
+
+                </Grid>
+            </StackLayout>
+
+            <!--<StackLayout>
+                <ScrollView>
+                    <ListView x:Name="Jobs"
+                                RefreshCommand="{Binding LoadItemsCommand}"
+                                HasUnevenRows="True"
+                                ItemTapped="jobListView_ItemTapped"
+                                ItemsSource="{Binding jobs}"
+                                IsPullToRefreshEnabled="True"
+                                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                                BackgroundColor="White">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Padding="0,10">
+                                        <Grid RowSpacing="0" ColumnSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="85"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding JobNo}" TextColor="Black" Grid.Column="0"/>
+                                            <Label Text="{Binding JobStatusName}" TextColor="Black" Grid.Column="1"/>
+                                            <Label Text="{Binding Equipment}" Grid.Column="2" TextColor="Black"/>
+                                            <Label Text="{Binding Comments}" Grid.Column="3" TextColor="Black"/>
+                                            --><!--<input:CheckBox Type="Check" IsDisabled="True" IsChecked="{Binding Invoiced}" HorizontalOptions="FillAndExpand" Grid.Column="3" TextFontSize="10"/>--><!--
+                                        </Grid>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
+            </StackLayout>-->
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

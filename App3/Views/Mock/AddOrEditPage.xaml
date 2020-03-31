@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:App3.Viewmodel"
+             mc:Ignorable="d"
+             x:Class="App3.Views.Mock.AddOrEditPage">
+
+    <ContentPage.BindingContext>
+        <vm:MockAddOrEditViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <!--<Entry Text="{Binding Employee.EmployeeCode}" Placeholder="Emp Code"/>
+            <Entry Text="{Binding Employee.EmployeeName}" Placeholder="Emp Code"/>-->
+
+            <Entry Text="{Binding Employee.EmployeeCode}" Placeholder="Emp Code"/>
+            <Entry Text="{Binding Employee.EmployeeName}" Placeholder="Emp Code"/>
+            <Button Text="Save"  Clicked="NavBack"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
